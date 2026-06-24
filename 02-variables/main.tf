@@ -1,29 +1,23 @@
 resource "aws_instance" "terrafrom_demo" {
     ami = var.ami_id
-    instance_type = "t3.micro"
+    instance_type = var.instance_type
     vpc_security_group_ids = [aws_security_group.allow-terraform.id]
 
-    tags = {
-    Name = "allow-terraform-1"
-    Project = "roboshop"
-    Environment = "dev"
-  }
+    tags = var.ec2-tags
 }
 
 #Security Groups Creation, it creates default VPC
 resource "aws_security_group" "allow-terraform" {
-  name        = "allow-terraform"
+  name        = var.sg_name
   description = "Allow TLS inbound traffic and all outbound traffic"
   
   #Outbound rules creation
   egress {
-    from_port        = 0
-    to_port          = 0
+    from_port        = var.port
+    to_port          = var.port
     protocol         = "-1" # means, allows all traffic
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
+    cidr_blocks      = var.cidr
   }
-
 
   tags = {
     Name = "allow-terraform"
