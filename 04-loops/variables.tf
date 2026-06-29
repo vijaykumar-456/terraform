@@ -4,6 +4,21 @@ variable "ami_id" {
     description = "RHEL9 joindevops image"
 }
 
+variable "environment" {
+  type = string
+  default = "dev"
+}
+
+variable "zone_id" {
+  type = string
+  default = "Z0968816Y6XJN6LDEDWK"
+}
+
+variable "domain_name" {
+    type = string
+    default = "learndevopskills.shop"
+}
+
 variable "instance_type" {
   type        = string
   description = "EC2 instance type for the web server"
@@ -15,19 +30,9 @@ variable "instance_type" {
   }
 }
 
-variable "ec2-tags" {
-  type        = map
-  description = "EC2 instance tags"
-  default     = {
-    Name = "allow-terraform-1"
-    Project = "roboshop"
-    Environment = "dev"
-  }
-}
-
 variable "sg_name" {
-    type = string
-    default = "allow_terraform_vars"
+  type    = string
+  default = "allow_terraform_vars"
 }
 
 variable "port" {
@@ -40,14 +45,18 @@ variable "cidr" {
     type = list
 }
 
-variable "sg-tags" {
-  type        = map
-  description = "EC2 sg tags"
-  default     = {
-    Name = "allow-terraform"
-    Project = "roboshop"
-    Environment = "dev"
-  }
+
+variable "instances" {
+    default = ["mongodb", "redis", "mysql","frontend"]
+    type = list
+
 }
+
+variable "project" {
+  default = "roboshop"
+  type = string
+}
+
+
 
 

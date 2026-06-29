@@ -4,6 +4,11 @@ variable "ami_id" {
     description = "RHEL9 joindevops image"
 }
 
+variable "environment" {
+  type = string
+  default = "prod"
+}
+
 variable "instance_type" {
   type        = string
   description = "EC2 instance type for the web server"
